@@ -1,0 +1,11 @@
+- name: Install Git
+  become: yes
+  yum: name=git state=present                   # TODO apt
+
+- name: Install Java JDK 1.8
+  become: yes
+  yum: name=java-1.8.0-openjdk state=present    # TODO apt
+
+- name: Install Curl
+  become: yes
+  yum: name=curl state=present                  # TODO apt

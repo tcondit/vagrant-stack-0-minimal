@@ -1,0 +1,37 @@
+- name: Install Java JDK 1.8
+  become: yes
+  yum: name=java-1.8.0-openjdk state=present    # TODO apt
+
+- name: Install required .deb for the build
+  become: yes
+  yum: pkg={{ item }} state=present             # TODO apt
+  with_items:
+    - rpm-build                                 # TODO find equivalent .deb
+    - redhat-rpm-config                         # TODO find equivalent .deb
+    - ruby                                      # TODO check name
+    - swig                                      # TODO check name
+    - openssl-devel                             # TODO check name
+    - ruby-devel                                # TODO check name
+    - sqlite-devel                              # TODO check name
+    - glib2                                     # TODO check name
+
+# TODO: Should this go into a subdirectory?
+- name: Copy swarm client script to remote location /etc/init.d/
+  become: yes
+  copy: src=files/swarm dest=/etc/init.d/swarm owner=root group=root mode=0755
+
+- name: Copy swarm client to remote location /opt/
+  become: yes
+  copy: src=files/swarm-client-2.0.tar.gz dest=/opt/swarm-client-2.0.tar.gz
+
+- name: Unzip swarm-client-2.0.tar.gz
+  become: yes
+  shell: cd /opt/ && tar xzvf swarm-client-2.0.tar.gz
+  args:
+    executable: /bin/bash
+
+- name: Start swarm client
+  become: yes
+  shell: /etc/init.d/swarm start
+  args:
+    executable: /bin/bash

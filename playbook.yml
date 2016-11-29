@@ -1,0 +1,16 @@
+# playbook.yml
+
+---
+- name: Configure Jenkins server
+  hosts: ci-integration
+  remote_user: vagrant
+  roles:
+    - jenkins-deps
+    - jenkins-ci
+    - jenkins-plugins
+
+- name: Configure build server
+  hosts: build
+  remote_user: vagrant
+  roles:
+    - build
