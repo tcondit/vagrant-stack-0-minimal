@@ -1,13 +1,13 @@
-# -*- mode: ruby -*-
+# Vagrantfile
 # vi: set ft=ruby :
 
-# based on
+# originally based on
 # http://blog.kaliloudiaby.com/index.php/bootstrap-ci-jenkins-and-build-server-with-ansible/
 
 Vagrant.configure("2") do |config|
 
   config.vm.define :jenkins_server do |jenkins_server_config|
-    jenkins_server_config.vm.box               = "hashicorp/precise64"
+    jenkins_server_config.vm.box               = "ubuntu/trusty64"
     jenkins_server_config.vm.hostname          = "jenkins-server"
     jenkins_server_config.vm.network             "private_network", ip: "192.168.50.200"
     jenkins_server_config.vm.synced_folder       ".", "/home/vagrant/sync", disabled: true
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :build_server do |build_server_config|
-    build_server_config.vm.box               = "hashicorp/precise64"
+    build_server_config.vm.box               = "ubuntu/trusty64"
     build_server_config.vm.hostname          = "build-server"
     build_server_config.vm.network             "private_network", ip: "192.168.50.201"
     build_server_config.vm.synced_folder       ".", "/home/vagrant/sync", disabled: true
