@@ -19,6 +19,7 @@ Vagrant.configure("2") do |config|
       ansible.playbook       = "playbook.yml"
       ansible.inventory_path = "hosts"
       ansible.limit          = "jenkins-server"
+
     end
   end
 

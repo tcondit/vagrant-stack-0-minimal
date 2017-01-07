@@ -1,0 +1,8 @@
+# hosts
+# vi: set ft=ruby :
+
+[ci-integration]
+jenkins-server ansible-host=192.168.50.200
+
+[build]
+build-server ansible-host=192.168.50.201
